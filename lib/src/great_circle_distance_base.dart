@@ -8,11 +8,11 @@ import 'package:great_circle_distance/src/formula/vincenty.dart';
 /// See [Great-circle distance](https://en.wikipedia.org/wiki/Great-circle_distance)
 class GreatCircleDistance {
 
-    double latitude1;
-    double longitude1;
+    double? latitude1;
+    double? longitude1;
 
-    double latitude2;
-    double longitude2;
+    double? latitude2;
+    double? longitude2;
 
     GreatCircleDistance.fromRadians(
         {this.latitude1, this.longitude1, this.latitude2, this.longitude2}) {
@@ -26,12 +26,12 @@ class GreatCircleDistance {
     }
 
     GreatCircleDistance.fromDegrees(
-        {this.latitude1, this.longitude1, this.latitude2, this.longitude2}) {
-        this.latitude1 = _radiansFromDegrees(latitude1);
-        this.longitude1 = _radiansFromDegrees(longitude1);
+        {required double this.latitude1, required double this.longitude1, required double this.latitude2, required double this.longitude2}) {
+        this.latitude1 = _radiansFromDegrees(latitude1!);
+        this.longitude1 = _radiansFromDegrees(longitude1!);
 
-        this.latitude2 = _radiansFromDegrees(latitude2);
-        this.longitude2 = _radiansFromDegrees(longitude2);
+        this.latitude2 = _radiansFromDegrees(latitude2!);
+        this.longitude2 = _radiansFromDegrees(longitude2!);
 
         _throwExceptionOnInvalidCoordinates();
     }
@@ -40,14 +40,14 @@ class GreatCircleDistance {
     /// The haversine formula determines the great-circle distance between two points on a sphere given their longitudes and latitudes
     /// See [Haversine formula](https://en.wikipedia.org/wiki/Haversine_formula)
     double haversineDistance() {
-        return Haversine.distance(this.latitude1, this.longitude1, this.latitude2, this.longitude2);
+        return Haversine.distance(this.latitude1!, this.longitude1, this.latitude2, this.longitude2);
     }
 
     /// Calculate distance using Spherical law of cosines
     /// See [Spherical law of cosines](https://en.wikipedia.org/wiki/Spherical_law_of_cosines)
     double sphericalLawOfCosinesDistance() {
         return Spherical_LawOfCosines.distance(
-            this.latitude1, this.longitude1, this.latitude2, this.longitude2);
+            this.latitude1!, this.longitude1, this.latitude2, this.longitude2);
     }
 
     /// Calculate distance using Vincenty formula
@@ -55,7 +55,7 @@ class GreatCircleDistance {
     /// They are based on the assumption that the figure of the Earth is an oblate spheroid, and hence are more accurate than methods that assume a spherical Earth, such as great-circle distance
     /// See [Vincenty's formulae](https://en.wikipedia.org/wiki/Vincenty%27s_formulae)
     double vincentyDistance() {
-        return Vincenty.distance(this.latitude1, this.longitude1, this.latitude2, this.longitude2);
+        return Vincenty.distance(this.latitude1!, this.longitude1, this.latitude2, this.longitude2);
     }
 
     double _radiansFromDegrees(final double degrees) => degrees * (pi / 180.0);
@@ -86,11 +86,11 @@ class GreatCircleDistance {
             see https://en.wikipedia.org/wiki/Decimal_degrees
         """;
 
-        if (!_isValidCoordinate(this.latitude1, this.longitude1))
+        if (!_isValidCoordinate(this.latitude1!, this.longitude1))
             throw new FormatException(
                 "Invalid coordinates at latitude1|longitude1\n$invalidDescription");
 
-        if (!_isValidCoordinate(this.latitude2, this.longitude2))
+        if (!_isValidCoordinate(this.latitude2!, this.longitude2))
             throw new FormatException(
                 "Invalid coordinates at latitude2|longitude2\n$invalidDescription");
     }

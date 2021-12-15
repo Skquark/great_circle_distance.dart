@@ -41,7 +41,7 @@ void main() {
             expect(() =>
             new GreatCircleDistance.fromDegrees(
                 latitude1: lat1, longitude1: lon1, latitude2: lat2, longitude2: lon2),
-                throwsA(predicate((e) => e is FormatException &&
+                throwsA(predicate((dynamic e) => e is FormatException &&
                     e.message.contains("latitude1|longitude1"))));
         });
 
@@ -56,7 +56,7 @@ void main() {
             expect(() =>
             new GreatCircleDistance.fromDegrees(
                 latitude1: lat1, longitude1: lon1, latitude2: lat2, longitude2: lon2),
-                throwsA(predicate((e) => e is FormatException &&
+                throwsA(predicate((dynamic e) => e is FormatException &&
                     e.message.contains("latitude2|longitude2"))));
         });
 
@@ -71,7 +71,7 @@ void main() {
             expect(() =>
             new GreatCircleDistance.fromDegrees(
                 latitude1: lat1, longitude1: lon1, latitude2: lat2, longitude2: lon2),
-                throwsA(predicate((e) => e is FormatException &&
+                throwsA(predicate((dynamic e) => e is FormatException &&
                     e.message.contains("latitude2|longitude2"))));
         });
 
@@ -86,7 +86,7 @@ void main() {
             expect(() =>
             new GreatCircleDistance.fromRadians(
                 latitude1: lat1, longitude1: lon1, latitude2: lat2, longitude2: lon2),
-                throwsA(predicate((e) => e is FormatException &&
+                throwsA(predicate((dynamic e) => e is FormatException &&
                     e.message.contains("latitude2|longitude2"))));
         });
     });

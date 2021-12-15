@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 void main() {
     group('Simple Vicenty`s formula distance tests', () {
 
-        GreatCircleDistance gcd;
+        late GreatCircleDistance gcd;
 
         final lat1 = 41.139129;
         final lon1 = 1.402244;
